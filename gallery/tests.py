@@ -28,7 +28,12 @@ class TestGalleryViews(TestCase):
             self.client.post(url, data=data)
 
         expected_file_path = os.path.join(settings.MEDIA_ROOT, 'blef', 'mon_chat.jpeg')
+        expected_file_medium_path = os.path.join(settings.MEDIA_ROOT, 'blef', 'mon_chat_medium.jpeg')
+        expected_file_small_path = os.path.join(settings.MEDIA_ROOT, 'blef', 'mon_chat_small.jpeg')
+
         self.assertTrue(os.path.exists(expected_file_path))
+        self.assertTrue(os.path.exists(expected_file_medium_path))
+        self.assertTrue(os.path.exists(expected_file_small_path))
 
         shutil.rmtree(settings.MEDIA_ROOT)
 
