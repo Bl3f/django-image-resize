@@ -1,0 +1,1 @@
+To run django tests : ` ./manage.py test --settings=test_image_resize.sqlite_tests_settings`
