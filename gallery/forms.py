@@ -16,7 +16,13 @@ def resize(image, factor):
     return ContentFile(buffer.getvalue())
 
 
-class UploadedImageForm(ModelForm):
+class ImageForm(ModelForm):
+    class Meta:
+        model = Image
+        fields = ['name', 'user']
+
+
+class UploadedImageForm(ImageForm):
     def save(self, commit=True):
         instance = super(UploadedImageForm, self).save(commit=False)
 
@@ -32,4 +38,4 @@ class UploadedImageForm(ModelForm):
 
     class Meta:
         model = UploadedImage
-        fields = ['name', 'user', 'file']
+        fields = ImageForm.Meta.fields + ['file']
