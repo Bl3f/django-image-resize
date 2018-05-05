@@ -4,7 +4,7 @@ import PIL
 from django.core.files.base import ContentFile, BytesIO
 from django.forms import ModelForm
 
-from gallery.models import Image
+from gallery.models import Image, UploadedImage
 
 
 def resize(image, factor):
@@ -16,9 +16,9 @@ def resize(image, factor):
     return ContentFile(buffer.getvalue())
 
 
-class ImageForm(ModelForm):
+class UploadedImageForm(ModelForm):
     def save(self, commit=True):
-        instance = super(ImageForm, self).save(commit=False)
+        instance = super(UploadedImageForm, self).save(commit=False)
 
         instance.file.file.seek(0)
         image = PIL.Image.open(instance.file.file)
@@ -31,5 +31,5 @@ class ImageForm(ModelForm):
         return instance
 
     class Meta:
-        model = Image
+        model = UploadedImage
         fields = ['name', 'user', 'file']

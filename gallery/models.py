@@ -18,6 +18,12 @@ def image_small_path(instance, filename):
 class Image(models.Model):
     name = models.CharField(max_length=64)
     user = models.CharField(max_length=64)
+
+    class Meta:
+        abstract = True
+
+
+class UploadedImage(Image):
     file = models.ImageField(upload_to=image_path)
     file_medium = models.ImageField(upload_to=image_medium_path)
     file_small = models.ImageField(upload_to=image_small_path)
