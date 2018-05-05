@@ -9,4 +9,4 @@ def upload(request):
     if form.is_valid():
         form.save()
 
-g    return HttpResponse('')
+    return HttpResponse('')
