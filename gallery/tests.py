@@ -1,5 +1,17 @@
+import os
+import shutil
+
+from django.conf import settings
 from django.test import TestCase
 from django.urls import reverse
+
+from gallery.utils import minify_name
+
+
+class TestUtils(TestCase):
+    def test_minify_name_simple(self):
+        name = 'Mon chat'
+        self.assertEqual(minify_name(name), 'mon_chat')
 
 
 class TestGalleryViews(TestCase):
@@ -10,6 +22,13 @@ class TestGalleryViews(TestCase):
             data = {
                 'image': image,
                 'name': 'Mon chat',
+                'user': 'blef',
             }
 
             self.client.post(url, data=data)
+
+        expected_file_path = os.path.join(settings.MEDIA_ROOT, 'blef', 'mon_chat.jpeg')
+        self.assertTrue(os.path.exists(expected_file_path))
+
+        shutil.rmtree(settings.MEDIA_ROOT)
+
