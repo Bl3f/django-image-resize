@@ -20,7 +20,7 @@ class TestGalleryViews(TestCase):
             url = reverse('upload')
 
             data = {
-                'image': image,
+                'file': image,
                 'name': 'Mon chat',
                 'user': 'blef',
             }

@@ -4,7 +4,7 @@ from gallery.utils import minify_name
 
 
 def image_path(instance, filename):
-    return '{0}/{1}'.format(instance.user, minify_name(instance.name))
+    return '{0}/{1}.jpeg'.format(instance.user, minify_name(instance.name))
 
 
 class Image(models.Model):
